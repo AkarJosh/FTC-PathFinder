@@ -18,7 +18,7 @@ class Grid(fieldSize: Int, nodeSize: Double) {
         var id = 0
         for (row in 1..rows)
             for (col in 1..cols) {
-                val node =  Node(id, row, col, nodeSize, this)
+                val node =  Node(id, row, col, this)
                 this.grid[id] = node
                 id += 1
             }

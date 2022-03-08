@@ -56,9 +56,9 @@ class AStar: Algorithm {
 fun main(){
     val algo = AStar()
 
-    val meepMeep = MeepMeep(800, 5)
-    val node = Grid(72, 0.5).grid[0]
-    meepMeep.addPoint(node!!.vector)
+    val meepMeep = MeepMeep(500, 5)
+    for(node in Grid(72, 0.5).grid.values)
+            meepMeep.addPoint(node.vector)
 
 
     meepMeep

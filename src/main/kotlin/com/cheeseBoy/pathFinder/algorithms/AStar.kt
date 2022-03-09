@@ -53,17 +53,4 @@ class AStar: Algorithm {
         return cameFrom
     }
 }
-fun main(){
-    val algo = AStar()
 
-    val meepMeep = MeepMeep(500, 5)
-    for(node in Grid(72, 0.5).grid.values)
-            meepMeep.addPoint(node.vector)
-
-
-    meepMeep
-        .setBackground(MeepMeep.Background.FIELD_FREIGHTFRENZY_ADI_DARK)
-        .setDarkMode(true)
-        .setBackgroundAlpha(0.95f)
-        .start()
-}

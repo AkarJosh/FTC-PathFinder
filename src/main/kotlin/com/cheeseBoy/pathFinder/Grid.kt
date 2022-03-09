@@ -1,33 +1,46 @@
 package com.cheeseBoy.pathFinder
 
-import kotlin.math.pow
-import kotlin.math.sqrt
+import com.noahbres.meepmeep.MeepMeep
 
 class Grid(fieldSize: Int, nodeSize: Double) {
 
 
     val grid = mutableMapOf<Int, Node>()
-    val rows: Int = 0
-    val cols: Int = rows
-    val size: Int = 0
 
     init {
-        val size = ((fieldSize / nodeSize).pow(2.0)).toInt()
-        val rows = sqrt(size.toDouble()).toInt()
-        val cols = rows
+
         var id = 0
-        for (row in 1..rows)
-            for (col in 1..cols) {
-                val node =  Node(id, row, col, this)
+        var r = -fieldSize.toDouble()
+        var c = r
+        while(r <= fieldSize) {
+            while (c <= fieldSize) {
+                val node = Node(id, r, c, this)
                 this.grid[id] = node
                 id += 1
+                c += nodeSize
             }
+            c = -fieldSize .toDouble()
+            r += nodeSize
+        }
+
         for(node in this.grid.values){
             node.updateNeighbors()
         }
     }
-
     fun getNode(id: Int): Node? {
         return this.grid[id]
     }
+}
+fun main(){
+    val meepMeep = MeepMeep(1000, 5)
+    for(node in Grid(72, 0.1).grid.values) {
+        meepMeep.addPoint(node.vector)
+    }
+
+
+    meepMeep
+        .setBackground(MeepMeep.Background.FIELD_FREIGHTFRENZY_ADI_DARK)
+        .setDarkMode(true)
+        .setBackgroundAlpha(0.95f)
+        .start()
 }

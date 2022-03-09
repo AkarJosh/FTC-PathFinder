@@ -21,24 +21,6 @@ class Node(val id: Int, row: Double, col: Double, val grid: Grid) {
     }
 
     fun updateNeighbors(){
-        /*if(row < grid.rows - 1 && grid.grid[this.id + grid.fieldSize]!!.type == NodeType.PATH)
-            this.neighbors.add(grid.grid[this.id + grid.fieldSize]!!)
-
-        if(row > 0 && grid.grid[this.id - grid.fieldSize]!!.type == NodeType.PATH)
-            this.neighbors.add(grid.grid[this.id - grid.fieldSize]!!)
-
-        try {
-            if(col < grid.rows - 1 && grid.grid[this.id + 1]!!.type == NodeType.PATH)
-                this.neighbors.add(grid.grid[this.id + 1]!!)
-        }catch (_: NullPointerException){
-
-        }
-        try {
-        if(col > 0 && grid.grid[this.id - 1]!!.type == NodeType.PATH)
-            this.neighbors.add(grid.grid[this.id - 1]!!)
-        }catch(_: NullPointerException){
-
-        }*/
     }
 
     fun switchType(){

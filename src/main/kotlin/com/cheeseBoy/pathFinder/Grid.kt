@@ -1,6 +1,6 @@
 package com.cheeseBoy.pathFinder
 
-class Grid(fieldSize: Int, nodeSize: Double) {
+class Grid(val fieldSize: Int, nodeSize: Double) {
 
 
     val grid = mutableMapOf<Int, Node>()

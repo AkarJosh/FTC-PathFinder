@@ -10,7 +10,7 @@ import kotlin.math.abs
 class AStar: Algorithm {
 
     fun heuristic(node1: Node?, node2: Node?): Double {
-        return (abs(node1!!.row - node2!!.row) + abs(node1.col - node2.col)).toDouble()
+        return (abs(node1!!.row - node2!!.row) + abs(node1.col - node2.col))
     }
     override fun calculatePath(start: Int, end: Int, grid: Grid): Map<Int, Int> {
         var count = 0

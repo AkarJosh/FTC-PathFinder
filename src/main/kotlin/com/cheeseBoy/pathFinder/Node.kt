@@ -12,6 +12,8 @@ class Node(val id: Int, row: Double, col: Double, val grid: Grid) {
     val col: Double
     val neighbors = mutableListOf<Node>()
     var vector = Vector2d()
+    /*val isXBorder: Boolean
+    val isYBorder: Boolean*/
     init {
 
         this.row = row
@@ -21,6 +23,15 @@ class Node(val id: Int, row: Double, col: Double, val grid: Grid) {
     }
 
     fun updateNeighbors(){
+        neighbors.add(grid.getNode(id)!!) //Center
+        neighbors.add(grid.getNode(id - (grid.fieldSize * 2 + 1))!!) //Bottom
+        neighbors.add(grid.getNode(id + (grid.fieldSize * 2 + 1))!!) //Top
+        neighbors.add(grid.getNode(id - 1)!!) //Left
+        neighbors.add(grid.getNode(id + 1)!!) //Right
+        neighbors.add(grid.getNode(id - (grid.fieldSize * 2))!!) //Bottom Right
+        neighbors.add(grid.getNode(id - (grid.fieldSize * 2 + 2))!!) //Bottom Left
+        neighbors.add(grid.getNode(id + (grid.fieldSize * 2))!!) //Top Left
+        neighbors.add(grid.getNode(id + (grid.fieldSize * 2 + 2))!!) //Top Right
     }
 
     fun switchType(){

@@ -2,55 +2,64 @@ package com.cheeseBoy.pathFinder.algorithms
 
 import com.cheeseBoy.pathFinder.Grid
 import com.cheeseBoy.pathFinder.Node
-import com.noahbres.meepmeep.MeepMeep
-import java.util.PriorityQueue
+import java.util.*
 import kotlin.Double.Companion.POSITIVE_INFINITY
-import kotlin.math.abs
+import kotlin.math.pow
+import kotlin.math.sqrt
 
-class AStar: Algorithm {
+class AStar {
 
-    fun heuristic(node1: Node?, node2: Node?): Double {
-        return (abs(node1!!.row - node2!!.row) + abs(node1.col - node2.col))
+    fun reconstructPath(cameFrom: Map<Node, Node>, current: Node): Set<Node>{
+        var currentNode = current
+        val totalPath = mutableSetOf(currentNode)
+        while(cameFrom.containsKey(currentNode)){
+            currentNode = cameFrom[currentNode]!!
+            totalPath.add(currentNode)
+        }
+        return totalPath.reversed().toSet()
     }
-    override fun calculatePath(start: Int, end: Int, grid: Grid): Map<Int, Int> {
-        var count = 0
-        val compare = compareBy<Triple<Double, Int, Int>> { it.first }
+
+    fun calculatePath(start: Node, end: Node, grid: Grid): Set<Node>? {
+
+        val compare = compareBy<Pair<Double, Node>> {it.first}
         val openSet = PriorityQueue(compare)
-        openSet.add(Triple(0.0, count, start))
-        val cameFrom = mutableMapOf<Int, Int>()
-        val gScore = mutableMapOf<Int, Double>()
-        for (i in grid.grid.keys) gScore[i] = POSITIVE_INFINITY
-        val fScore = mutableMapOf<Int, Double>()
-        for (i in grid.grid.keys) fScore[i] = POSITIVE_INFINITY
-        fScore[start] = heuristic(grid.getNode(start), grid.getNode(end))
+        openSet.add(0.0 to start)
+
+        val cameFrom = mutableMapOf<Node, Node>()
+
+        val gScore = mutableMapOf<Node, Double>()
+        val fScore = mutableMapOf<Node, Double>()
+
+        for(node in grid.getNodes()){
+            gScore[node] = POSITIVE_INFINITY
+            fScore[node] = POSITIVE_INFINITY
+        }
+
+        gScore[start] = 0.0
+        fScore[start] = start.vector distTo end.vector
 
 
-        val openSetHash = mutableSetOf(start)
 
-        while(openSet.isNotEmpty()){
-            val current = openSet.peek().third
-            openSetHash.remove(current)
+        while (!openSet.isEmpty()){
+            val current = openSet.poll().second
 
-            if(current == end) return cameFrom
+            if (current == end){
+                return reconstructPath(cameFrom, current)
+            }
 
-            for(neighbor in grid.grid[current]!!.neighbors){
-                val tempGScore = gScore[current]!! + 1
-
-                if(tempGScore < gScore[neighbor.id]!!){
-                    cameFrom[neighbor.id] = current
-                    gScore[neighbor.id] = tempGScore
-                    fScore[neighbor.id] = tempGScore + heuristic(grid.getNode(neighbor.id), grid.getNode(end))
-                    if (!openSetHash.contains(neighbor.id)){
-                        count += 1
-                        openSet.add(Triple(fScore[neighbor.id], count, neighbor.id) as Triple<Double, Int, Int>?)
-                        openSetHash.add(neighbor.id)
+            current.neighbors.forEach {
+                val tentativeGScore = gScore[current]!! + (current.vector distTo it.vector)
+                if(tentativeGScore < gScore[it]!!){
+                    cameFrom[it] = current
+                    gScore[it] = tentativeGScore
+                    fScore[it] = tentativeGScore + (it.vector distTo  end.vector)
+                    if(!openSet.contains(Pair(Any(), it))){
+                        openSet.add(Pair(fScore[it], it) as Pair<Double, Node>?)
                     }
                 }
             }
         }
-
-
-        return cameFrom
+        return null
     }
 }
 

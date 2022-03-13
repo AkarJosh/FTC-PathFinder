@@ -1,20 +1,19 @@
 package com.cheeseBoy.pathFinder
 
-class Grid(val fieldSize: Int, nodeSize: Double) {
+import com.acmerobotics.roadrunner.geometry.Vector2d
+
+class Grid(fieldSize: Int, val nodeSize: Double) {
 
 
-    val grid = mutableMapOf<Int, Node>()
+    private val grid = mutableMapOf<Vector2d, Node>()
 
     init {
-
-        var id = 0
         var r = -fieldSize.toDouble()
         var c = r
         while(r <= fieldSize) {
             while (c <= fieldSize) {
-                val node = Node(id, r, c, this)
-                this.grid[id] = node
-                id += 1
+                val node = Node(r, c, this)
+                this.grid[Vector2d(r, c)] = node
                 c += nodeSize
             }
             c = -fieldSize .toDouble()
@@ -25,7 +24,11 @@ class Grid(val fieldSize: Int, nodeSize: Double) {
             node.updateNeighbors()
         }
     }
-    fun getNode(id: Int): Node? {
-        return this.grid[id]
+    fun getNode(vector: Vector2d): Node? {
+        return this.grid[vector]
+    }
+
+    fun getNodes(): List<Node>{
+        return grid.values.toList()
     }
 }

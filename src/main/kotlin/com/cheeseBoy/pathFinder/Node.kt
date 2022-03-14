@@ -2,23 +2,13 @@ package com.cheeseBoy.pathFinder
 
 import com.acmerobotics.roadrunner.geometry.Vector2d
 
-class Node(row: Double, col: Double, private val grid: Grid) {
+class Node(val vector: Vector2d, private val grid: Grid) {
     enum class NodeType{
         BARRIER,
         PATH
     }
     private var type: NodeType = NodeType.PATH
-    private val row: Double
-    private val col: Double
     val neighbors = mutableListOf<Node>()
-    var vector = Vector2d()
-    init {
-
-        this.row = row
-        this.col = col
-
-        this.vector = Vector2d(col, row)
-    }
 
     fun updateNeighbors() {
 

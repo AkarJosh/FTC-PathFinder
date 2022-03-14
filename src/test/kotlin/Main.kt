@@ -10,15 +10,11 @@ fun main(){
     val algo = AStar()
 
     val fieldSize = 72
-    val grid = Grid(fieldSize, 0.5)
+    val grid = Grid(fieldSize, 1.0)
 
     val start = grid.getNode(Vector2d(50.0, 50.0))
     val end = grid.getNode(Vector2d(67.0, 60.0))
     val path = algo.calculatePath(start!!, end!!, grid)
-
-    start.neighbors.forEach {
-        meepMeep.addPoint(it.vector)
-    }
 
     path!!.forEach {
         meepMeep.addPoint(it.vector)

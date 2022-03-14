@@ -1,11 +1,10 @@
 package com.cheeseBoy.pathFinder.algorithms
 
+import com.acmerobotics.roadrunner.geometry.Vector2d
 import com.cheeseBoy.pathFinder.Grid
 import com.cheeseBoy.pathFinder.Node
 import java.util.*
 import kotlin.Double.Companion.POSITIVE_INFINITY
-import kotlin.math.pow
-import kotlin.math.sqrt
 
 class AStar {
 
@@ -20,7 +19,6 @@ class AStar {
     }
 
     fun calculatePath(start: Node, end: Node, grid: Grid): Set<Node>? {
-
         val compare = compareBy<Pair<Double, Node>> {it.first}
         val openSet = PriorityQueue(compare)
         openSet.add(0.0 to start)
@@ -38,12 +36,14 @@ class AStar {
         gScore[start] = 0.0
         fScore[start] = start.vector distTo end.vector
 
-
-
         while (!openSet.isEmpty()){
             val current = openSet.poll().second
 
             if (current == end){
+                println(grid.getNode(Vector2d(start.vector.x, start.vector.y + 1.0))!!.vector distTo end.vector)
+                println(grid.getNode(Vector2d(start.vector.x + 1.0, start.vector.y + 1.0))!!.vector distTo end.vector)
+                //println(fScore[grid.getNode(Vector2d(start.vector.x, start.vector.y + 1.0))])
+                //println(fScore[grid.getNode(Vector2d(start.vector.x + 1.0, start.vector.y + 1.0))])
                 return reconstructPath(cameFrom, current)
             }
 

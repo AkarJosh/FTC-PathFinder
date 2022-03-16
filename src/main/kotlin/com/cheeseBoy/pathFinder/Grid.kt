@@ -21,7 +21,6 @@ class Grid(fieldSize: Double, val nodeSize: Double, meepMeep: MeepMeep) {
             r += nodeSize
         }
 
-        //println("Updating Neighbors")
         for(node in this.grid.values){
             node.updateNeighbors()
         }

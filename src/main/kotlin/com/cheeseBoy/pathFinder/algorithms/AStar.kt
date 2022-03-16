@@ -7,19 +7,18 @@ import java.util.*
 import kotlin.Double.Companion.POSITIVE_INFINITY
 
 class AStar {
-    fun reconstructPath(cameFrom: Map<Node, Node>, current: Node): Set<Node>{
+    private fun reconstructPath(cameFrom: Map<Node, Node>, current: Node): Set<Node>{
         var currentNode = current
         val totalPath = mutableSetOf(currentNode)
         while(cameFrom.containsKey(currentNode)){
             currentNode = cameFrom[currentNode]!!
             totalPath.add(currentNode)
-            currentNode.setColor(Color.MAGENTA)
+            currentNode.setColor(Color.ORANGE)
         }
         return totalPath.reversed().toSet()
     }
 
     fun calculatePath(start: Node, end: Node, grid: Grid): Set<Node>? {
-        //println(end.vector)
         val compare = compareBy<Pair<Double, Node>> {it.first}
         val openSet = PriorityQueue(compare)
         openSet.add(0.0 to start)
@@ -48,8 +47,6 @@ class AStar {
 
             current.neighbors.forEach {neighbor ->
                 val tentativeGScore = gScore[current]!! + (current.vector distTo neighbor.vector)
-                /*println("TENTATIVE: $tentativeGScore")
-                println("${gScore[neighbor]}")*/
                 if(tentativeGScore < gScore[neighbor]!!){
                     cameFrom[neighbor] = current
                     gScore[neighbor] = tentativeGScore

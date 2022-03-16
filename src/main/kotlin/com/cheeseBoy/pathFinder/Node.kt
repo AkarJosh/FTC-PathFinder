@@ -1,17 +1,26 @@
 package com.cheeseBoy.pathFinder
 
 import com.acmerobotics.roadrunner.geometry.Vector2d
+import com.noahbres.meepmeep.MeepMeep
+import com.noahbres.meepmeep.core.entity.BoxIndicatorEntity
+import java.awt.Color
 
-class Node(val vector: Vector2d, private val grid: Grid) {
+class Node(val vector: Vector2d, private val grid: Grid, val meepMeep: MeepMeep) {
     enum class NodeType{
         BARRIER,
         PATH
     }
-    private var type: NodeType = NodeType.PATH
+    var type: NodeType = NodeType.PATH
     val neighbors = mutableListOf<Node>()
+    var currentColor: Color = Color(0, 0, 0, 0)
+    val boxEntity: BoxIndicatorEntity
+
+    init {
+        boxEntity = BoxIndicatorEntity(meepMeep, this.currentColor, this.vector, grid.nodeSize)
+        meepMeep.addBox(boxEntity)
+    }
 
     fun updateNeighbors() {
-
         // Checks if the potential neighbor is a barrier and will through null pointer exception if current node is on the border
 
         //Bottom
@@ -68,5 +77,10 @@ class Node(val vector: Vector2d, private val grid: Grid) {
             NodeType.BARRIER -> this.type = NodeType.PATH
             NodeType.PATH -> this.type = NodeType.BARRIER
         }
+    }
+
+    fun setColor(color: Color){
+        this.currentColor = color
+        meepMeep.switchBoxColor(boxEntity, color)
     }
 }

@@ -72,7 +72,7 @@ class Node(val vector: Vector2d, private val grid: Grid, val meepMeep: MeepMeep)
             Vector2d(this.vector.x - (3 * grid.nodeSize), this.vector.y + (2 * grid.nodeSize)),
             Vector2d(this.vector.x - (3 * grid.nodeSize), this.vector.y + (3 * grid.nodeSize)),
             Vector2d(this.vector.x - (2 * grid.nodeSize), this.vector.y + (3 * grid.nodeSize)),
-            Vector2d(this.vector.x - grid.nodeSize, this.vector.y + (3 * grid.nodeSize)),
+            Vector2d(this.vector.x - grid.nodeSize , this.vector.y + (3 * grid.nodeSize)),
             )
 
         for(pos in neighborPos){

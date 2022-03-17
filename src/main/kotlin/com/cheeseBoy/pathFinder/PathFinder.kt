@@ -20,7 +20,11 @@ class PathFinder(windowSize: Int, fps: Int = 30, nodeSize: Double = 0.5) {
         grid = Grid(72.0, nodeSize, meepMeep)
     }
 
-    fun findPath(start: Vector2d, end: Vector2d) {
+    fun findPath(start: Vector2d, end: Vector2d, vararg obstacle: Obstacle) {
+
+        obstacle.forEach {
+
+        }
         val startNode = Node(start, grid, meepMeep)
         val endNode = Node(end, grid, meepMeep)
 

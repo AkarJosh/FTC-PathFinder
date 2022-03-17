@@ -2,6 +2,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     kotlin("jvm") version "1.6.20-M1"
+    "maven-publish"
 }
 
 group = "com.cheeseBoy"

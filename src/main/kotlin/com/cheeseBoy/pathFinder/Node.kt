@@ -10,13 +10,12 @@ class Node(val vector: Vector2d, private val grid: Grid, val meepMeep: MeepMeep)
         BARRIER,
         PATH
     }
-    var type: NodeType = NodeType.PATH
+    private var type: NodeType = NodeType.PATH
     val neighbors = mutableListOf<Node>()
-    var currentColor: Color = Color(0, 0, 0, 0)
-    val boxEntity: BoxIndicatorEntity
+    private var currentColor: Color = Color(0, 0, 0, 0)
+    val boxEntity: BoxIndicatorEntity = BoxIndicatorEntity(meepMeep, this.currentColor, this.vector, grid.nodeSize)
 
     init {
-        boxEntity = BoxIndicatorEntity(meepMeep, this.currentColor, this.vector, grid.nodeSize)
         meepMeep.addBox(boxEntity)
     }
 
@@ -32,6 +31,7 @@ class Node(val vector: Vector2d, private val grid: Grid, val meepMeep: MeepMeep)
             Vector2d(this.vector.x + grid.nodeSize, this.vector.y - grid.nodeSize),
             Vector2d(this.vector.x - grid.nodeSize, this.vector.y + grid.nodeSize),
             Vector2d(this.vector.x - grid.nodeSize, this.vector.y - grid.nodeSize),
+
             Vector2d(this.vector.x + (2 * grid.nodeSize), this.vector.y),
             Vector2d(this.vector.x - (2 * grid.nodeSize), this.vector.y),
             Vector2d(this.vector.x, this.vector.y + (2 * grid.nodeSize)),
@@ -47,8 +47,33 @@ class Node(val vector: Vector2d, private val grid: Grid, val meepMeep: MeepMeep)
             Vector2d(this.vector.x + (2 * grid.nodeSize), this.vector.y + grid.nodeSize),
             Vector2d(this.vector.x + (2 * grid.nodeSize), this.vector.y - grid.nodeSize),
             Vector2d(this.vector.x - (2 * grid.nodeSize), this.vector.y + grid.nodeSize),
-            Vector2d(this.vector.x - (2 * grid.nodeSize), this.vector.y - grid.nodeSize)
-        )
+            Vector2d(this.vector.x - (2 * grid.nodeSize), this.vector.y - grid.nodeSize),
+
+            Vector2d(this.vector.x, this.vector.y + (3 * grid.nodeSize)),
+            Vector2d(this.vector.x + grid.nodeSize, this.vector.y + (3 * grid.nodeSize)),
+            Vector2d(this.vector.x + (2 * grid.nodeSize), this.vector.y + (3 * grid.nodeSize)),
+            Vector2d(this.vector.x + (3 * grid.nodeSize), this.vector.y + (3 * grid.nodeSize)),
+            Vector2d(this.vector.x + (3 * grid.nodeSize), this.vector.y + (2 * grid.nodeSize)),
+            Vector2d(this.vector.x + (3 * grid.nodeSize), this.vector.y + grid.nodeSize),
+            Vector2d(this.vector.x + (3 * grid.nodeSize), this.vector.y),
+            Vector2d(this.vector.x + (3 * grid.nodeSize), this.vector.y - grid.nodeSize),
+            Vector2d(this.vector.x + (3 * grid.nodeSize), this.vector.y - (2 * grid.nodeSize)),
+            Vector2d(this.vector.x + (3 * grid.nodeSize), this.vector.y - (3 * grid.nodeSize)),
+            Vector2d(this.vector.x + (2 * grid.nodeSize), this.vector.y - (3 * grid.nodeSize)),
+            Vector2d(this.vector.x + grid.nodeSize, this.vector.y - (3 * grid.nodeSize)),
+            Vector2d(this.vector.x, this.vector.y - (3 * grid.nodeSize)),
+            Vector2d(this.vector.x - grid.nodeSize, this.vector.y - (3 * grid.nodeSize)),
+            Vector2d(this.vector.x - (2 * grid.nodeSize), this.vector.y - (3 * grid.nodeSize)),
+            Vector2d(this.vector.x - (3 * grid.nodeSize), this.vector.y - (3 * grid.nodeSize)),
+            Vector2d(this.vector.x - (3 * grid.nodeSize), this.vector.y - (2 * grid.nodeSize)),
+            Vector2d(this.vector.x - (3 * grid.nodeSize), this.vector.y - grid.nodeSize),
+            Vector2d(this.vector.x - (3 * grid.nodeSize), this.vector.y),
+            Vector2d(this.vector.x - (3 * grid.nodeSize), this.vector.y + grid.nodeSize),
+            Vector2d(this.vector.x - (3 * grid.nodeSize), this.vector.y + (2 * grid.nodeSize)),
+            Vector2d(this.vector.x - (3 * grid.nodeSize), this.vector.y + (3 * grid.nodeSize)),
+            Vector2d(this.vector.x - (2 * grid.nodeSize), this.vector.y + (3 * grid.nodeSize)),
+            Vector2d(this.vector.x - grid.nodeSize, this.vector.y + (3 * grid.nodeSize)),
+            )
 
         for(pos in neighborPos){
             try {

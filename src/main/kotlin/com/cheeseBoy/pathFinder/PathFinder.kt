@@ -8,15 +8,16 @@ import com.noahbres.meepmeep.roadrunner.DefaultBotBuilder
 import com.noahbres.meepmeep.roadrunner.DriveShim
 import java.awt.Color
 
-class PathFinder {
+class PathFinder(windowSize: Int, fps: Int = 30, nodeSize: Double = 0.5) {
 
-    val meepMeep = MeepMeep(800, 30)
-
-    val grid = Grid(72.0, 0.5, meepMeep)
+    val meepMeep: MeepMeep
+    val grid: Grid
     val algo = AStar()
 
     init {
         System.setProperty("sun.java2d.opengl", "true")
+        meepMeep = MeepMeep(windowSize, fps)
+        grid = Grid(72.0, nodeSize, meepMeep)
     }
 
     fun findPath(start: Vector2d, end: Vector2d) {

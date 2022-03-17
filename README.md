@@ -12,7 +12,7 @@ repositories {
 }
   
 dependencies {
-    implementation 'com.github.Cheeseboy8020:FTC-PathFinder:v0.1.0'
+    implementation 'com.github.Cheeseboy8020:FTC-PathFinder:v0.2.0'
 }
 ```
 
@@ -23,7 +23,7 @@ repositories {
 }
   
 dependencies {
-    implementation("com.github.Cheeseboy8020:FTC-PathFinder:v0.1.0")
+    implementation("com.github.Cheeseboy8020:FTC-PathFinder:v0.2.0")
 }
 ```
 

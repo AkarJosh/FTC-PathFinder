@@ -11,31 +11,18 @@ import java.awt.Color
 
 fun main() {
     System.setProperty("sun.java2d.opengl", "true")
-    val meepMeep = MeepMeep(700, 30)
+    val meepMeep = MeepMeep(900, 30)
 
-    //println("Started Grid Creation")
-
-    val grid = Grid(72.0, 0.2, meepMeep)
+    val grid = Grid(72.0, 0.5, meepMeep)
     val algo = AStar()
 
-    //println("Created Grid")
-
     val start = Node(Vector2d(50.0, 50.0), grid, meepMeep)
-    val end = Node(Vector2d(-29.0, 32.0), grid, meepMeep)
-
-    /*grid.getNode(Vector2d(55.0, 55.0))!!.switchType()
-    println(grid.getNode(Vector2d(55.0, 55.0))!!.type)
-    grid.getNode(Vector2d(54.0, 54.0))!!.updateNeighbors()*/
-
-    //println("Started A*")
+    val end = Node(Vector2d(-28.0, 32.0), grid, meepMeep)
 
     val path = algo.calculatePath(start, end, grid) as MutableSet<Node>
 
-
     start.setColor(Color.BLUE)
     end.setColor(Color.MAGENTA)
-
-    //println("Finished A*")
 
     val myBot =
         DefaultBotBuilder(meepMeep) // Set bot constraints: maxVel, maxAccel, maxAngVel, maxAngAccel, track width
@@ -48,7 +35,6 @@ fun main() {
                 }
                 builder.build()
             }
-
 
     meepMeep
         .setBackground(MeepMeep.Background.FIELD_FREIGHTFRENZY_ADI_DARK)

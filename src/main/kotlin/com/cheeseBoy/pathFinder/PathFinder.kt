@@ -13,6 +13,7 @@ class PathFinder(windowSize: Int, fps: Int = 30, nodeSize: Double = 0.5) {
     val meepMeep: MeepMeep
     val grid: Grid
     val algo = AStar()
+    val obstacles = mutableListOf<Obstacle>()
 
     init {
         System.setProperty("sun.java2d.opengl", "true")
@@ -20,11 +21,13 @@ class PathFinder(windowSize: Int, fps: Int = 30, nodeSize: Double = 0.5) {
         grid = Grid(72.0, nodeSize, meepMeep)
     }
 
-    fun findPath(start: Vector2d, end: Vector2d, vararg obstacle: Obstacle) {
+    fun findPath(start: Vector2d, end: Vector2d) {
+        for (obstacle in obstacles)
+            for(node in obstacle.nodes)
+                for (neighbor in node!!.neighbors) {
+                    neighbor.updateNeighbors()
+                }
 
-        obstacle.forEach {
-
-        }
         val startNode = Node(start, grid, meepMeep)
         val endNode = Node(end, grid, meepMeep)
 
@@ -51,5 +54,9 @@ class PathFinder(windowSize: Int, fps: Int = 30, nodeSize: Double = 0.5) {
             .addEntity(myBot)
             .setBackgroundAlpha(0.95f)
             .start()
+    }
+
+    fun addObstacle(obstacle: Obstacle){
+        obstacles.add(obstacle)
     }
 }

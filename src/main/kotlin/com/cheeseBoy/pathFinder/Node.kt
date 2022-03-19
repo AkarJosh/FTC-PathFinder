@@ -10,7 +10,7 @@ class Node(val vector: Vector2d, private val grid: Grid, val meepMeep: MeepMeep)
         BARRIER,
         PATH
     }
-    private var type: NodeType = NodeType.PATH
+    var type: NodeType = NodeType.PATH
     val neighbors = mutableListOf<Node>()
     private var currentColor: Color = Color(0, 0, 0, 0)
     val boxEntity: BoxIndicatorEntity = BoxIndicatorEntity(meepMeep, this.currentColor, this.vector, grid.nodeSize)
@@ -20,6 +20,8 @@ class Node(val vector: Vector2d, private val grid: Grid, val meepMeep: MeepMeep)
     }
 
     fun updateNeighbors() {
+
+        neighbors.clear()
         // Checks if the potential neighbor is a barrier and will through null pointer exception if current node is on the border
 
         val neighborPos = listOf(
